@@ -85,6 +85,7 @@
     "yoshi-copy": "latest",
     "yoshi-eslint": "latest",
     "yoshi-fedops-build-report": "^1.0.0",
+    "yoshi-jest": "latest",
     "yoshi-maven-statics": "latest",
     "yoshi-petri": "latest",
     "yoshi-sass": "latest",

@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const {runIndividualTranspiler} = require('../config/project');
 const {isTypescriptProject, isBabelProject} = require('./utils');
 
@@ -16,9 +17,17 @@ function transpiler() {
 }
 
 function tests(options) {
-  const commands = ['mocha', 'jasmine', 'protractor', 'karma', 'jest'];
-  const option = commands.find(option => options[option]);
-  return option ? [[`./tasks/${option}`]] : [['./tasks/mocha'], ['./tasks/protractor']];
+  const commands = {
+    mocha: './tasks/mocha',
+    jasmine: './tasks/jasmine',
+    protractor: './tasks/protractor',
+    karma: './tasks/karma',
+    jest: 'yoshi-jest'
+  };
+
+  const option = _.find(commands, (value, key) => options[key]);
+
+  return option ? [[option]] : [[commands.mocha], [commands.protractor]];
 }
 
 module.exports = options => ({
