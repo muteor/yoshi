@@ -2,15 +2,14 @@
   "name": "yoshi-modules",
   "private": true,
   "scripts": {
-    "clean": "lerna clean --yes",
-    "clean-locks": "lerna exec -- rm -f yarn.lock && lerna exec -- touch yarn.lock",
+    "clean": "lerna-script clean",
     "bootstrap": "lerna bootstrap",
-    "test": "lerna run build && lerna --concurrency=1 run test",
-    "pull-req": "lerna-script pullRequest"
+    "test": "lerna-script test"
   },
   "devDependencies": {
     "lerna": "^2.0.0",
-    "lerna-script": "latest"
+    "lerna-script": "latest",
+    "lerna-script-preset-idea": "latest"
   },
   "managedDependencies": {
     "@types/angular": "^1.6.3",

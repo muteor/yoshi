@@ -1,9 +1,15 @@
-const lernaScript = require('lerna-script');
+const {rootPackage, exec} = require('lerna-script');
 
-module.exports.pullRequest = () => {
-  const execCommand = lernaScript.exec.command(lernaScript.rootPackage());	
+module.exports.test = () => {
   setInterval(() => console.log('.'), 1000 * 60 * 5).unref();
 
-  return execCommand('npm run bootstrap')
-  	.then(() => execCommand('npm run test'));
+  return exec.command(rootPackage())('lerna run build && lerna --concurrency=1 run test');
+};
+
+module.exports.clean = () => {
+  setInterval(() => console.log('.'), 1000 * 60 * 5).unref();
+  const runCommand = exec.command(rootPackage());
+
+  return runCommand('lerna clean --yes')
+    .then(() => runCommand('lerna exec -- rm -f yarn.lock && lerna exec -- touch yarn.lock'));
 };
