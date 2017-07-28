@@ -16,7 +16,8 @@ before_install:
  - npm install -g yarn@0.27.3
 install:
  - yarn install
- - yarn start bootstrap
+ - yarn run bootstrap
+ - yarn run test
 
 notifications:
   email:
