@@ -1,10 +1,11 @@
 {
-  "name": "yoshi-monorepo",
+  "name": "yoshi-modules",
   "private": true,
   "scripts": {
     "clean": "lerna clean --yes",
+    "clean-locks": "lerna exec -- rm -f yarn.lock && lerna exec -- touch yarn.lock",
     "bootstrap": "lerna bootstrap",
-    "test": "lerna run build && lerna run test",
+    "test": "lerna run build && lerna --concurrency=1 run test",
     "lerna": "lerna"
   },
   "devDependencies": {
