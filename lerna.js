@@ -1,8 +1,9 @@
 const lernaScript = require('lerna-script');
 
-module.exports.test = () => {
+module.exports.pullRequest = () => {
+  const execCommand = lernaScript.exec.command(lernaScript.rootPackage());	
   setInterval(() => console.log('.'), 1000 * 60 * 5).unref();
-  const execCommand = lernaScript.exec.command(lernaScript.rootPackage());
 
-  return execCommand('npm run test');
+  return execCommand('npm run bootstrap')
+  	.then(() => execCommand('npm run test'));
 };

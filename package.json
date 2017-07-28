@@ -6,12 +6,11 @@
     "clean-locks": "lerna exec -- rm -f yarn.lock && lerna exec -- touch yarn.lock",
     "bootstrap": "lerna bootstrap",
     "test": "lerna run build && lerna --concurrency=1 run test",
-    "lerna": "lerna",
-    "start": "lerna-script"
+    "pull-req": "lerna-script pullRequest"
   },
   "devDependencies": {
     "lerna": "^2.0.0",
-    "lerna-script": "^0.0.4"
+    "lerna-script": "latest"
   },
   "managedDependencies": {
     "@types/angular": "^1.6.3",
