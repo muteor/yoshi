@@ -31,7 +31,7 @@
     "require-reload": "~0.2.2",
     "turnerjs": "~1.0.256",
     "velocity": "~0.7.2",
-    "yoshi": "latest"
+    "yoshi": "~1.1.0"
   },
   "dependencies": {
     "angular": "^1.6.1"

@@ -26,7 +26,7 @@
     "jsdom": "^10.1.0",
     "jsdom-global": "^3.0.2",
     "nock": "^8.0.0",
-    "yoshi": "latest"
+    "yoshi": "~1.1.0"
   },
   "dependencies": {
     "axios": "^0.16.1",
