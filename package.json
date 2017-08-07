@@ -11,6 +11,16 @@
     "lerna-script": "latest",
     "lerna-script-preset-idea": "latest"
   },
+  "workspaces": [
+    "yoshi",
+    "yoshi-runtime",
+    "yoshi-utils",
+    "test-phases",
+    "examples/*",
+    "generators/*",
+    "plugins/*",
+    "presets/*"
+  ],
   "managedDependencies": {
     "@types/angular": "^1.6.3",
     "@types/angular-mocks": "^1.5.8",

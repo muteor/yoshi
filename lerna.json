@@ -3,15 +3,5 @@
   "npmClient": "yarn",
   "npmClientArgs": ["--no-lockfile"],
   "useWorkspaces": true,
-  "packages": [
-      "yoshi",
-      "yoshi-runtime",
-      "yoshi-utils",
-      "test-phases",
-      "examples/*",
-      "generators/*",
-      "plugins/*",
-      "presets/*"
-  ],
   "version": "0.0.0"
 }
