@@ -1,6 +1,5 @@
 'use strict';
 
-const path = require('path');
 const merge = require('lodash.merge');
 const jestCli = require('jest-cli');
 
@@ -13,7 +12,7 @@ module.exports = ({log, watch, inTeamCity, projectConfig}) => {
     });
 
     if (inTeamCity()) {
-      config.testResultsProcessor = path.join(__dirname, 'node_modules', 'jest-teamcity-reporter');
+      config.testResultsProcessor = require.resolve('jest-teamcity-reporter');
     }
 
     return new Promise((resolve, reject) => {

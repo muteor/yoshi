@@ -1,5 +1,7 @@
 const {rootPackage, exec} = require('lerna-script');
 
+module.exports.idea = require('lerna-script-preset-idea');
+
 module.exports.test = () => {
   setInterval(() => console.log('.'), 1000 * 60 * 5).unref();
 
