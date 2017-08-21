@@ -5,7 +5,7 @@
     "clean": "lerna-script clean",
     "bootstrap": "lerna bootstrap",
     "test": "lerna-script test",
-    "start": "lerna-script"
+    "ls": "lerna-script"
   },
   "devDependencies": {
     "lerna": "^2.0.0",

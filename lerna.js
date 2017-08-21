@@ -1,17 +1,20 @@
-const {rootPackage, exec} = require('lerna-script');
+const {loadRootPackage, loadPackages, exec, iter, filters, changes} = require('lerna-script');
 
 module.exports.idea = require('lerna-script-preset-idea');
 
 module.exports.test = () => {
-  setInterval(() => console.log('.'), 1000 * 60 * 5).unref();
+  const packages = filters.removeBuilt(loadPackages())('test');
 
-  return exec.command(rootPackage())('lerna run build && lerna --concurrency=1 run test');
+  return iter.forEach(packages)(pkg => {
+  	return exec.script(pkg)('build')
+  	  .then(() => exec.script(pkg, {silent: false})('test'))
+  	  .then(() => changes.build(pkg)('test'));
+  });
 };
 
 module.exports.clean = () => {
-  setInterval(() => console.log('.'), 1000 * 60 * 5).unref();
-  const runCommand = exec.command(rootPackage());
-
-  return runCommand('lerna clean --yes')
-    .then(() => runCommand('lerna exec -- rm -f yarn.lock && lerna exec -- touch yarn.lock'));
+  return iter.parallel(loadPackages())(pkg => {
+    const runCommand = exec.command(pkg);
+  	return Promise.all(['rm -f yarn.lock', 'touch yarn.lock', 'rm -rf node_modules', 'rm -f *.log'].map(runCommand));
+  });
 };
