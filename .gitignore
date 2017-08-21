@@ -11,3 +11,4 @@ package-lock.json
 *.iml
 target
 lerna-debug.log
+.lerna
