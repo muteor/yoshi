@@ -113,7 +113,8 @@
     "ps-tree": "~1.1.0",
     "retry-promise": "~1.0.0",
     "shelljs": "~0.7.8",
-    "wnpm-ci": "latest"
+    "wnpm-ci": "latest",
+    "yoshi-utils": "latest"
   },
   "eslintConfig": {
     "extends": "wix",
