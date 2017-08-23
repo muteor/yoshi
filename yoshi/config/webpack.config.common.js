@@ -19,7 +19,8 @@ const config = {
       context
     ],
 
-    extensions: ['.ts', '.js', '.tsx', '.jsx']
+    extensions: ['.ts', '.js', '.tsx', '.jsx'],
+    symlinks: projectConfig.symlinks()
   },
 
   resolveLoader: {
@@ -47,7 +48,8 @@ const config = {
   node: {
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
+    __dirname: true
   },
 
   devtool: 'source-map',

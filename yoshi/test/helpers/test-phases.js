@@ -27,6 +27,11 @@ class Test {
     return this;
   }
 
+  apply({hooks = []}) {
+    hooks.forEach(hook => hook(this.tmp, cwd));
+    return this;
+  }
+
   spawn(command, options, environment = {}) {
     if (this.hasTmp()) {
       try {

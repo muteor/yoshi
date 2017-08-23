@@ -49,6 +49,7 @@ module.exports = {
   tpaStyle: () => getConfig('tpaStyle', false),
   features: () => getConfig('features', {}),
   externals: () => getConfig('externals', []),
+  symlinks: () => getConfig('symlinks', true),
   babel: () => _.get(packagejson, 'babel'),
   runIndividualTranspiler: () => getConfig('runIndividualTranspiler', true),
   unprocessedModules: () => path => {
