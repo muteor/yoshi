@@ -10,8 +10,7 @@ module.exports = config => {
 
   config.module.rules = [
     ...webpackCommonConfig.module.rules,
-    ...require('../lib/loaders/sass')(false, cssModules, false, projectName).client,
-    ...require('../lib/loaders/stylable')(false, cssModules, false).client
+    ...require('../lib/loaders/sass')(false, cssModules, false, projectName).client    
   ];
 
   config.plugins = [
