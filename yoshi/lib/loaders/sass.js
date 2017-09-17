@@ -4,7 +4,7 @@ const path = require('path');
 const {merge} = require('lodash/fp');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {cssModulesPattren} = require('yoshi-runtime');
-const stylableLoaderFactory = require('./stylable');
+const stylable = require('./stylable');
 
 const useResolveUrlLoader = process.env.RESOLVE_URL_LOADER === 'true';
 
@@ -26,7 +26,7 @@ module.exports = (separateCss, cssModules, tpaStyle, projectName) => {
   };
 
   const globalRegex = /\.global\.s?css$/;
-  const stylableRegex = stylableLoaderFactory.stylableRegExp;
+  const stylableRegex = stylable.stylableRegExp;
 
   const getScssRule = (ruleConfig, loaderConfig) => merge(ruleConfig, {
     test: /\.s?css$/,
