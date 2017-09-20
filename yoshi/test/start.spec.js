@@ -9,6 +9,8 @@ const fetch = require('node-fetch');
 const retryPromise = require('retry-promise').default;
 const {outsideTeamCity} = require('./helpers/env-variables');
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
 describe('Aggregator: Start', () => {
   let test, child;
@@ -204,6 +206,32 @@ describe('Aggregator: Start', () => {
           // This is because we're using self signed certificate - otherwise the request will fail
           const agent = new https.Agent({
             rejectUnauthorized: false
+          });
+
+          return cdnIsServing('assets/test.json', 'https', {agent});
+        });
+
+        it('should be able to create an https server with specified certificate', () => {
+
+          child = test
+          .setup({
+            'src/assets/test.json': '{a: 1}',
+            'src/index.js': 'var a = 1;',
+            'package.json': fx.packageJson({
+              servers: {cdn: {
+                port: 3005,
+                dir: 'dist/statics',
+                ssl: true,
+                key: path.join(__dirname, 'fixtures/https/key.pem'),
+                cert: path.join(__dirname, 'fixtures/https/fullchain.pem'),
+                passphrase: ''
+              }}})
+          })
+          .spawn('start');
+
+          // certs generated using https://git.daplie.com/Daplie/nodejs-self-signed-certificate-example
+          const agent = new https.Agent({
+            ca: fs.readFileSync(path.join(__dirname, 'fixtures/https/chain.pem')),
           });
 
           return cdnIsServing('assets/test.json', 'https', {agent});

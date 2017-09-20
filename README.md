@@ -99,6 +99,23 @@ The following are the default values for the CDN server's port, mount directory 
 }
 ```
 
+You can optionally specify the certificate config like:
+
+```json
+"yoshi": {
+  "servers": {
+    "cdn": {
+      "port": 3200,
+      "dir": "dist/statics",
+      "ssl": true,
+      "key": "my/key.pem",
+      "cert": "my/cert.pem",
+      "passphrase": "mypass"
+    }
+  }
+}
+```
+
 ### build
 
 Flag | Short Flag | Description | Default Value
