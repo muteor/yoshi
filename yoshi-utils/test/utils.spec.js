@@ -1,5 +1,5 @@
 const {expect} = require('chai');
-const {isProduction, isCI} = require('../index');
+const {isProduction, isCI, usingYarn, pkgManager} = require('../index');
 
 describe('Yoshi Utils', () => {
   let originalEnv;
@@ -8,7 +8,7 @@ describe('Yoshi Utils', () => {
   });
   afterEach(() => process.env = originalEnv);
 
-  describe('isProduction', () => {
+  describe('.isProduction()', () => {
     it('should return true', () => {
       process.env.NODE_ENV = 'production';
       expect(isProduction()).to.equal(true);
@@ -25,7 +25,7 @@ describe('Yoshi Utils', () => {
     });
   });
 
-  describe('Is CI', () => {
+  describe('.isCI()', () => {
     it('should return true for TC', () => {
       process.env.BUILD_NUMBER = true;
       expect(isCI()).to.equal(true);
@@ -48,4 +48,32 @@ describe('Yoshi Utils', () => {
       expect(isCI()).to.equal(false);
     });
   });
+
+  describe('.usingYarn()', () => {
+    it('should return true if it was executed with yarn', () => {
+      process.env['npm_config_user_agent'] = 'yarn/0.27.5 npm/? node/v6.11.1 darwin x64';
+      expect(usingYarn()).to.equal(true);
+    });
+
+    it('should return false if it was executed with npm', () => {
+      process.env['npm_config_user_agent'] = 'npm/3.10.10 node/v6.11.1 darwin x64';
+      expect(usingYarn()).to.equal(false);
+    });
+  });
+
+  describe('.pkgManager()', () => {
+    // npm_execpath values
+    // yarn - /Users/tomas/.nvm/versions/node/v6.11.1/lib/node_modules/yarn/bin/yarn.js
+    // npm - /Users/tomas/.nvm/versions/node/v6.11.1/lib/node_modules/npm/bin/npm-cli.js
+    
+    it('should return current package manager', () => {
+      const pm = process.env.npm_execpath = '/Users/tomas/.nvm/versions/node/v6.11.1/lib/node_modules/yarn/bin/yarn.js';
+      expect(pkgManager()).to.equal(pm);
+    });
+
+    it('should return "npm" if something goes wrong', () => {
+      process.env.npm_execpath = null;
+      expect(pkgManager()).to.equal('npm');
+    });
+  })
 });
